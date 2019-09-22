@@ -14,6 +14,15 @@ public class HomePage extends PageObject {
     @FindBy (css ="button.searchsubmit")
     WebElementFacade searchButton;
 
+    @FindBy(css= ".logout")
+    WebElementFacade logoutLink;
+
+    @FindBy (css ="#error-page a")
+    WebElementFacade logoutConfirmationLink;
+
+    @FindBy(id="mastheads")
+    WebElementFacade siteHeader;
+
     public void setSearchField (String searchItem){
         typeInto(searchField,searchItem);
     }
@@ -22,5 +31,12 @@ public class HomePage extends PageObject {
         clickOn(searchButton);
     }
 
+    public void clickLogoutLink(){
+        clickOn(logoutLink);
+    }
+
+    public boolean isLoggedOut(){
+        return !siteHeader.containsText("Welcome");
+    }
 
 }

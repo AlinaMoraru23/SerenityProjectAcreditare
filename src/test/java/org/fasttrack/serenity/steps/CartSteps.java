@@ -6,6 +6,7 @@ import org.fasttrack.serenity.pages.CartPage;
 import org.fasttrack.serenity.pages.ProductPage;
 import org.junit.Assert;
 
+
 public class CartSteps {
 
     private CartPage cartPage;
@@ -45,14 +46,6 @@ public class CartSteps {
         Assert.assertTrue("The product was not removed from the cart",cartPage.checkProductWasRemovedFromCart(removedProductName));
     }
 
-    @Step
-    public void wait(int time){
-    try{
-        Thread.sleep(time);
-    }catch (InterruptedException e) {
-    }
-
-    }
 
     @Step
     public void undoRemoveItemFromCart(){
@@ -60,7 +53,7 @@ public class CartSteps {
     }
 
     @Step
-    public void cartSubtotalCalculation(){
+    public void cartProductSubtotalCalculation(){
         cartPage.getFirstProductPrice();
         cartPage.getProductQuantity();
         cartPage.getCartProductsSubtotals();
@@ -72,4 +65,68 @@ public class CartSteps {
     public void verifyProductSubtotalCalculation(){
         Assert.assertTrue("The subtotal is not correct",cartPage.verifyCartFirstLineSubtotal());
     }
+
+    @Step
+    public void waitForTextToAppear(String text){
+        cartPage.waitForTextToAppearInCart(text);
+    }
+
+    @Step
+    public void waitForTextToDisappear(String text){
+        cartPage.waitForTextToDisappearFromCart(text);
+    }
+
+    @Step
+    public void cartSubtotalCalculation(){
+        cartPage.getCartProductsSubtotals();
+        cartPage.calculateCartSubtotal();
+        cartPage.getCartSubtotal();
+    }
+
+    @Step
+    public void verifyCartSubtotalCalculation(){
+        Assert.assertTrue("The subtotal is not calculated correct",cartPage.verifyCartSubtotalCalculation());
+    }
+
+    @Step
+    public void clickCheckoutLink(){
+        cartPage.clickCheckoutLink();
+    }
+
+    @Step
+    public void useCouponCode(String couponCode){
+        cartPage.enterCouponCode(couponCode);
+        cartPage.clickApplyCouponButton();
+
+    }
+
+    @Step
+    public void verifyCouponCodeIsDisplayedInCartTotals(String couponCode){
+        Assert.assertTrue("The discount amount is not visible in cart",cartPage.verifyCouponCodeIsDisplayedInCartTotals(couponCode));
+    }
+
+    @Step
+    public void cartTotalCalculation(){
+        cartPage.getCartSubtotal();
+        cartPage.getCartDiscountValue();
+        cartPage.getCartTotalValue();
+    }
+
+    @Step
+    public void verifyCartTotalCalculationWithDiscount(){
+        Assert.assertTrue("The total after coupon code applied is not calculated correct",cartPage.verifyCartTotalCalculationWithDiscount());
+    }
+
+    @Step
+    public void percentageDiscountCalculation() {
+        cartPage.getCartSubtotal();
+        cartPage.getCartDiscountValue();
+    }
+
+    @Step
+    public void verifyPercentageDiscountCalculation(Integer percentage){
+        Assert.assertTrue("The percentage discount is not calculated correct",cartPage.verifyPercentageDiscountCalculation(percentage));
+    }
+
+
 }

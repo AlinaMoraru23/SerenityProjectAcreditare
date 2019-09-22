@@ -26,7 +26,6 @@ public class SearchTest {
 
 
     @Test
-
     public void searchItemSingleResultDisplayed(){
         loginSteps.navigateToHomePage();
         searchSteps.searchItem("Cap");

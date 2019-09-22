@@ -5,7 +5,12 @@ import net.serenitybdd.core.pages.PageObject;
 public class BasePage extends PageObject{
 
 
-//pun aici chestiile generale de care am nevoie si in alte pages
+    @Override
+    protected void waitABit(long timeInMilliseconds) {
+        super.waitABit(timeInMilliseconds);
+    }
+
+
 
 
 }

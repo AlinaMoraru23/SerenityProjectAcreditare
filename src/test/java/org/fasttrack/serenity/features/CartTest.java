@@ -2,10 +2,8 @@ package org.fasttrack.serenity.features;
 
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
 import org.fasttrack.serenity.steps.*;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
@@ -27,6 +25,9 @@ public class CartTest {
 
     @Steps
     private CartSteps cartSteps;
+
+    @Steps
+    private CheckoutSteps checkoutSteps;
 
 
     @Test
@@ -55,10 +56,8 @@ public class CartTest {
         productSteps.addProductToCart();
         productSteps.clickViewCart();
         cartSteps.changeProductQuantity("5");
-        cartSteps.wait(5000);
-        cartSteps.cartSubtotalCalculation();
+        cartSteps.cartProductSubtotalCalculation();
         cartSteps.verifyProductSubtotalCalculation();
-
 
     }
 
@@ -71,8 +70,9 @@ public class CartTest {
         productSteps.addProductToCart();
         productSteps.clickViewCart();
         cartSteps.removeFirstItemFromCart();
-        cartSteps.wait(200);
+        cartSteps.waitForTextToDisappear("Polo");
         cartSteps.checkProductWasRemovedFromCart("Polo");
+
     }
 
     @Test
@@ -84,12 +84,67 @@ public class CartTest {
         productSteps.addProductToCart();
         productSteps.clickViewCart();
         cartSteps.removeFirstItemFromCart();
-        cartSteps.wait(1000);
+        cartSteps.waitForTextToDisappear("Polo");
         cartSteps.undoRemoveItemFromCart();
-        cartSteps.wait(1000);
+        cartSteps.waitForTextToAppear("Polo");
         cartSteps.checkProductIsInCart("Polo");
 
     }
 
+    @Test
+    public void checkCartSubtotal(){
+        loginSteps.navigateToHomePage();
+        searchSteps.searchItem("Polo");
+        productSteps.addProductToCart();
+        searchSteps.searchItem("Cap");
+        productSteps.addProductToCart();
+        productSteps.clickViewCart();
+        cartSteps.cartSubtotalCalculation();
+        cartSteps.verifyCartSubtotalCalculation();
+
+    }
+
+    @Test
+    public void checkCheckoutPageIsDisplayed(){
+        loginSteps.navigateToHomePage();
+        searchSteps.searchItem("Polo");
+        productSteps.addProductToCart();
+        productSteps.clickViewCart();
+        cartSteps.clickCheckoutLink();
+        checkoutSteps.isCheckoutPageDisplayed();
+
+    }
+
+    @Test
+    public void checkCouponCodeIsDisplayedInCart(){
+        loginSteps.navigateToHomePage();
+        searchSteps.searchItem("Polo");
+        productSteps.addProductToCart();
+        productSteps.clickViewCart();
+        cartSteps.useCouponCode("fixed10");
+        cartSteps.verifyCouponCodeIsDisplayedInCartTotals("FIXED10");
+    }
+
+    @Test
+    public void checkCartTotalWithCouponCode(){
+        loginSteps.navigateToHomePage();
+        searchSteps.searchItem("Polo");
+        productSteps.addProductToCart();
+        productSteps.clickViewCart();
+        cartSteps.useCouponCode("fixed10");
+        cartSteps.cartTotalCalculation();
+        cartSteps.verifyCartTotalCalculationWithDiscount();
+    }
+
+    @Test
+    public void checkPercentageDiscountCalculation(){
+        loginSteps.navigateToHomePage();
+        searchSteps.searchItem("Polo");
+        productSteps.addProductToCart();
+        productSteps.clickViewCart();
+        cartSteps.useCouponCode("percentage20");
+        cartSteps.percentageDiscountCalculation();
+        cartSteps.verifyPercentageDiscountCalculation(20);
+    }
 
 }

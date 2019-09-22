@@ -1,7 +1,6 @@
 package org.fasttrack.serenity.steps;
 
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.annotations.Steps;
 import org.fasttrack.serenity.pages.HomePage;
 import org.fasttrack.serenity.pages.ProductPage;
 import org.fasttrack.serenity.pages.SearchResultsPage;

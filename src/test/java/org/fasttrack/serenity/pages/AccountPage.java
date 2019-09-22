@@ -9,6 +9,8 @@ public class AccountPage extends PageObject {
     @FindBy (css ="[class*='MyAccount-content']")
     private WebElementFacade helloText;
 
+
+
     public boolean isLoggedIn(String userName){
         return helloText.containsText(userName);
     }

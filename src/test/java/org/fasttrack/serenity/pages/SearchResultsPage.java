@@ -12,7 +12,7 @@ public class SearchResultsPage extends PageObject {
     @FindBy(css = ".collection_title h3")
     private List<WebElementFacade> searchResultItemsTitle;
 
-//method breaks at first element that doesn't contain the searched text
+//method checks if all results contain the searched text -> breaks at first element that doesn't contain the text
     public boolean isProductInResults(String searchItem) {
         for (WebElementFacade element : searchResultItemsTitle) {
             if (!element.getText().contains(searchItem)) {
