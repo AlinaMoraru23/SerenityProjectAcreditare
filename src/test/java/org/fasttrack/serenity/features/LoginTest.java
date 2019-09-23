@@ -22,14 +22,14 @@ public class LoginTest {
 
 
     @Test
-    public void validLoginTestWithEmailAddress() {
+    public void checkValidLoginTestWithEmailAddress() {
         loginSteps.navigateToLoginPage();
         loginSteps.performLogin(Constants.USER_EMAIL, Constants.USER_PASS);
         loginSteps.checkLoggedIn(Constants.USER_NAME);
     }
 
     @Test
-    public void validLoginTestWithUsername(){
+    public void checkValidLoginTestWithUsername(){
         loginSteps.navigateToLoginPage();
         loginSteps.performLogin(Constants.USER_NAME, Constants.USER_PASS);
         loginSteps.checkLoggedIn(Constants.USER_NAME);

@@ -32,8 +32,6 @@ public class CheckoutSteps {
         checkoutPage.waitForTextToAppear("ORDER RECEIVED");
         checkoutPage.getOrderNumber();
         orderNumberValue = checkoutPage.getOrderNumber();
-        System.out.println("click place order - order number"+orderNumberValue);
-
 
     }
 

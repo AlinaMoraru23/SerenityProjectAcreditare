@@ -35,7 +35,6 @@ public class CheckoutPage extends BasePage {
 
     public String getOrderNumber() {
         orderNumber = "#"+orderNumberElement.getText();
-        System.out.println("the order number is " +orderNumber);
         return orderNumber;
 
     }
