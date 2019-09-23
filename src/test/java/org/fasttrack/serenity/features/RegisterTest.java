@@ -25,9 +25,23 @@ public class RegisterTest {
     @Test
     public void checkUserIsInAdminUserList(){
         loginSteps.navigateToLoginPage();
-        loginSteps.performAdminLogin();
-        adminSteps.openUsers();
-        adminSteps.verifyUsernameIsInAdminUserList(Constants.USER_NAME);
+        loginSteps.performAdminLogin(Constants.ADMIN_EMAIL,Constants.ADMIN_PASS);
+        adminSteps.openUsersPage();
+        adminSteps.verifyTextInBodyList(Constants.USER_NAME);
+    }
+
+    @Test
+    public void checkRegisterANewUser(){
+        loginSteps.navigateToLoginPage();
+        loginSteps.performRegister(Constants.REGISTER_EMAIL, Constants.REGISTER_PASS);
+        loginSteps.logout();
+        loginSteps.navigateToLoginPage();
+        loginSteps.performAdminLogin(Constants.ADMIN_EMAIL,Constants.ADMIN_PASS);
+        adminSteps.openUsersPage();
+        adminSteps.verifyTextInBodyList(Constants.REGISTER_USERNAME);
+        adminSteps.searchItemInAdminUsersPage(Constants.REGISTER_USERNAME);
+        adminSteps.deleteItem();
+        adminSteps.confirmDeletion();
     }
 
 }

@@ -26,17 +26,17 @@ public class SearchTest {
 
 
     @Test
-    public void searchItemSingleResultDisplayed(){
+    public void checkSearchResultContainsTheSearchedText(){
         loginSteps.navigateToHomePage();
         searchSteps.searchItem("Cap");
-        searchSteps.checkSearchedItemIsDispayed("Cap");
+        searchSteps.verifySearchResultContainsTheSearchedText("Cap");
     }
 
     @Test
-    public void searchItemMultipleResultsDisplayed(){
+    public void checkAllSearchResultsContainTheSearchedText(){
         loginSteps.navigateToHomePage();
         searchSteps.searchItem("T-Shirt");
-        searchSteps.checkSearchedItemsAreDisplayed("T-Shirt");
+        searchSteps.verifyAllSearchResultsContainTheSearchedText("T-Shirt");
     }
 
 

@@ -9,4 +9,8 @@ public class Constants {
     public static final String ADMIN_EMAIL = "admin";
     public static final String ADMIN_PASS = "parola11";
 
+
+    public static final String REGISTER_EMAIL = "alinamoraru2323@gmail.com";
+    public static final String REGISTER_PASS = "Pass@register19";
+    public static final String REGISTER_USERNAME = "alinamoraru2323";
 }

@@ -19,12 +19,12 @@ public class SearchSteps {
     }
 
     @Step
-    public void checkSearchedItemIsDispayed(String searchItem) {
+    public void verifySearchResultContainsTheSearchedText(String searchItem) {
         Assert.assertTrue("Result doesn't contain the searched item", productPage.isProductInResult(searchItem));
     }
 
     @Step
-    public void checkSearchedItemsAreDisplayed(String searchItem){
+    public void verifyAllSearchResultsContainTheSearchedText(String searchItem){
         Assert.assertTrue("Not all results contain the searched item", searchResultsPage.isProductInResults(searchItem));
 
     }

@@ -10,7 +10,6 @@ public class AccountPage extends PageObject {
     private WebElementFacade helloText;
 
 
-
     public boolean isLoggedIn(String userName){
         return helloText.containsText(userName);
     }

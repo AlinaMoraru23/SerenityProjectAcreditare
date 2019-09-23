@@ -9,19 +9,16 @@ import net.thucydides.core.annotations.DefaultUrl;
 public class HomePage extends PageObject {
 
     @FindBy (css ="input[name='s']")
-    WebElementFacade searchField;
+    private WebElementFacade searchField;
 
     @FindBy (css ="button.searchsubmit")
-    WebElementFacade searchButton;
+    private WebElementFacade searchButton;
 
     @FindBy(css= ".logout")
-    WebElementFacade logoutLink;
-
-    @FindBy (css ="#error-page a")
-    WebElementFacade logoutConfirmationLink;
+    private WebElementFacade logoutLink;
 
     @FindBy(id="mastheads")
-    WebElementFacade siteHeader;
+    private WebElementFacade siteHeader;
 
     public void setSearchField (String searchItem){
         typeInto(searchField,searchItem);

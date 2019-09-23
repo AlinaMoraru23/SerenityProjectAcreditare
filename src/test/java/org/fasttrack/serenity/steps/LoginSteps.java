@@ -4,6 +4,7 @@ import net.thucydides.core.annotations.Step;
 import org.fasttrack.serenity.Util.Constants;
 import org.fasttrack.serenity.pages.*;
 import org.junit.Assert;
+import org.yecht.Data;
 
 public class LoginSteps {
 
@@ -42,9 +43,9 @@ public class LoginSteps {
     }
 
     @Step
-    public void performAdminLogin(){
-        loginPage.setLoginUserNameOrEmailAddressField(Constants.ADMIN_EMAIL);
-        loginPage.setLoginPasswordField(Constants.ADMIN_PASS);
+    public void performAdminLogin(String email, String password){
+        loginPage.setLoginUserNameOrEmailAddressField(email);
+        loginPage.setLoginPasswordField(password);
         loginPage.clickLoginButton();
         adminOrdersPage.open();
 
@@ -54,5 +55,13 @@ public class LoginSteps {
     public void checkLoggedOut(){
         Assert.assertTrue("Logout not performed",homePage.isLoggedOut());
     }
+
+    @Step
+    public void performRegister(String email, String password){
+        loginPage.setRegisterEmailAddressField(email);
+        loginPage.setRegisterPasswordField(password);
+        loginPage.clickRegisterButton();
+    }
+
 
 }

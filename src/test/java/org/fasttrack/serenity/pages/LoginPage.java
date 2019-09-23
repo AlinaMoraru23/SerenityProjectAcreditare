@@ -42,5 +42,20 @@ public class LoginPage extends PageObject {
         clickOn(loginButton);
     }
 
+    public void setRegisterEmailAddressField(String email){
+        typeInto(registerEmailAddressField,email);
+    }
+
+    public void setRegisterPasswordField(String password){
+        typeInto(registerPasswordField,password);
+    }
+
+    public void clickRegisterButton(){
+        clickOn(registerButton);
+    }
+
+
+
+
 
 }

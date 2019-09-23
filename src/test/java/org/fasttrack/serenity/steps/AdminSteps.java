@@ -2,10 +2,9 @@ package org.fasttrack.serenity.steps;
 
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.annotations.Steps;
-import org.fasttrack.serenity.pages.AdminOrdersPage;
-import org.fasttrack.serenity.pages.AdminUsersPage;
-import org.fasttrack.serenity.pages.CheckoutPage;
+import org.fasttrack.serenity.pages.*;
 import org.junit.Assert;
+import org.yecht.Data;
 
 
 public class AdminSteps {
@@ -16,16 +15,23 @@ public class AdminSteps {
     private AdminOrdersPage adminOrdersPage;
     private AdminUsersPage adminUsersPage;
     private CheckoutPage checkoutPage;
+    private BasePageAdmin basePageAdmin;
+    private AdminCouponsPage adminCouponsPage;
 
 
     @Step
-    public void openWooCommerce() {
+    public void openOrdersPage() {
         adminOrdersPage.open();
     }
 
     @Step
-    public void openUsers() {
+    public void openUsersPage() {
         adminUsersPage.open();
+    }
+
+    @Step
+    public void openCouponsPage() {
+        adminCouponsPage.open();
     }
 
     @Step
@@ -37,8 +43,41 @@ public class AdminSteps {
     }
 
     @Step
-    public void verifyUsernameIsInAdminUserList(String user) {
-        Assert.assertTrue("The username was not found in the Username List", adminUsersPage.doesListContain(user));
+    public void verifyTextInBodyList(String text) {
+        Assert.assertTrue("The text was not found in the body list", basePageAdmin.doesListContain(text));
     }
+
+    @Step
+    public void searchItemInAdminUsersPage(String searchItem) {
+        adminUsersPage.setSearchField(searchItem);
+        basePageAdmin.clickSearchButton();
+    }
+
+    @Step
+    public void deleteItem() {
+        basePageAdmin.enableRowActions();
+        basePageAdmin.deleteItem();
+    }
+
+    @Step
+    public void confirmDeletion() {
+        adminUsersPage.confirmDeletion();
+    }
+
+    @Step
+    public void createCoupon(String couponTitle, String discountType, String couponAmount) {
+        adminCouponsPage.clickAddCoupon();
+        adminCouponsPage.setCouponTitle(couponTitle);
+        adminCouponsPage.selectDiscountType(discountType);
+        adminCouponsPage.setCouponAmount(couponAmount);
+        adminCouponsPage.clickPublishButton();
+    }
+
+    @Step
+    public void searchItemInAdminCouponsPage(String searchItem) {
+        adminCouponsPage.setSearchField(searchItem);
+        basePageAdmin.clickSearchButton();
+    }
+
 }
 

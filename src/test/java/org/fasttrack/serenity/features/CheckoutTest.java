@@ -60,8 +60,8 @@ public class CheckoutTest {
         checkoutSteps.clickPlaceOrder();
         loginSteps.logout();
         loginSteps.navigateToLoginPage();
-        loginSteps.performAdminLogin();
-        adminSteps.openWooCommerce();
+        loginSteps.performAdminLogin(Constants.ADMIN_EMAIL, Constants.ADMIN_PASS);
+        adminSteps.openOrdersPage();
         adminSteps.verifyOrderNumber();
 
 
